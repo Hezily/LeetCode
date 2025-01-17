@@ -3,4 +3,8 @@ class Solution:
         res = 0
         for val in derived:
             res ^= val
-        return res == 0
+        
+        if res!=0:
+            return False
+        else:
+            return True
