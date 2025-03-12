@@ -1,6 +1,10 @@
-
 class Solution:
     def maximumCount(self, nums: List[int]) -> int:
-        a = sum(1 for num in nums if num < 0)
-        b = sum(1 for num in nums if num > 0)
-        return max(a,b)
+        a, b = 0, 0
+        for num in nums:
+            if num < 0:
+                a += 1
+            elif num > 0:
+                b += 1
+        return max(a, b)
+
