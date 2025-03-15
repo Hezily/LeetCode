@@ -16,13 +16,13 @@ public:
         }
         return ans;
     }
-    
+
     bool isRobberyPossible(int capability, const vector<int>& nums, int minHouses) {
         int housesRobbed = 0;
-        for (size_t i = 0; i < nums.size(); i++) {
+        for (size_t i = 0; i < nums.size(); i = i + 2) {
             if (nums[i] <= capability) {
                 housesRobbed++;
-                i++;
+                // i++;
             }
             if (housesRobbed >= minHouses) return true;
         }
