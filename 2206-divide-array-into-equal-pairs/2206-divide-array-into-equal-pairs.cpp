@@ -1,18 +1,18 @@
 class Solution {
 public:
     bool divideArray(vector<int>& nums) {
-        unordered_map<int, int> freq;
+        int freq[1001] = {0}; 
 
         for (int num : nums) {
             freq[num]++;
         }
 
-        for (auto pair : freq) {
-            if (pair.second % 2 != 0) {
+        for (int i = 0; i <= 1000; i++) {
+            if (freq[i] % 2 != 0) {
                 return false;
             }
         }
-        
+
         return true;
     }
 };
