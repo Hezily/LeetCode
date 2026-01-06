@@ -12,6 +12,8 @@
 class Solution {
 public:
     int maxLevelSum(TreeNode* root) {
+
+        // BFS
         int maxSum = INT_MIN;
         int resultLevel = 0;
         int currLevel = 1;
