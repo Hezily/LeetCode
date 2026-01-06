@@ -9,48 +9,87 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+// class Solution {
+// public:
+//     int maxLevelSum(TreeNode* root) {
+//         int maxSum = INT_MIN;
+//         int resultLevel = 0;
+//         int currLevel = 1;
+        
+//         queue<TreeNode*> que;
+//         que.push(root);
+        
+        
+//         while(!que.empty()) {
+
+//             int n = que.size();
+            
+//             int sum = 0;
+            
+//             while(n--) {
+                
+//                 TreeNode* node = que.front();
+//                 que.pop();
+                
+//                 sum += node->val;
+                
+//                 if(node->left)
+//                     que.push(node->left);
+                
+//                 if(node->right)
+//                     que.push(node->right);
+//             }
+            
+//             if(sum > maxSum) {
+//                 maxSum = sum;
+//                 resultLevel = currLevel;
+//             }
+//             currLevel++;
+//         }
+        
+//         return resultLevel;
+        
+//     }
+// };
+
+
 class Solution {
 public:
+    
+    map<int, int> mp;
+    
+    void DFS(TreeNode* root, int currLevel) {
+        
+        if(!root)
+            return;
+        
+        mp[currLevel] += root->val;
+        
+        DFS(root->left, currLevel+1);
+        DFS(root->right, currLevel+1);
+        
+    }
+    
     int maxLevelSum(TreeNode* root) {
-
-        // BFS
+        mp.clear();
+        
+        DFS(root, 1);
+        
         int maxSum = INT_MIN;
-        int resultLevel = 0;
-        int currLevel = 1;
-
-        queue<TreeNode*> que;
-        que.push(root);
-
-        while(!que.empty())
-        {
-            int size = que.size();
-            int sum = 0;
-
-            while(size--)
-            {
-                TreeNode* node = que.front();
-                que.pop();
-
-                sum += node->val;
-
-                if(node->left)
-                {
-                    que.push(node->left);
-                }
-                if(node->right)
-                {
-                    que.push(node->right);
-                }
-            }
-
-            if(sum > maxSum)
-            {
+        int result = 0;
+        
+        for(auto &it : mp) {
+            
+            int level = it.first;
+            int sum   = it.second;
+            
+            if(sum > maxSum) {
                 maxSum = sum;
-                resultLevel = currLevel;
+                result = level;
             }
-            currLevel++;
-
+            
         }
-        return resultLevel;
+        
+        return result;
     }
 };
